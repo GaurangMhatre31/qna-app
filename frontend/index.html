@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .file-upload, .question-box {
+      margin-bottom: 20px;
+    }
+    .file-upload label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #555;
+    }
+    input[type="file"], input[type="text"], button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .response-box {
+      margin-top: 20px;
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Question Answering System</h1>
+
+    <!-- File Upload Section -->
+    <div class="file-upload">
+      <label for="file-input">Upload a PDF or Word Document:</label>
+      <input type="file" id="file-input" accept=".pdf, .docx">
+      <button id="upload-button">Upload File</button>
+      <div id="upload-status"></div>
+    </div>
+
+    <!-- Question Box -->
+    <div class="question-box">
+      <label for="question-input">Ask a Question:</label>
+      <input type="text" id="question-input" placeholder="Type your question here...">
+      <button id="ask-button">Ask</button>
+      <div id="response-box"></div>
+    </div>
+  </div>
+
+  <script>
+    const uploadButton = document.getElementById("upload-button");
+    const fileInput = document.getElementById("file-input");
+    const uploadStatus = document.getElementById("upload-status");
+    const askButton = document.getElementById("ask-button");
+    const questionInput = document.getElementById("question-input");
+    const responseBox = document.getElementById("response-box");
+
+    // File Upload Functionality
+    uploadButton.addEventListener("click", async () => {
+      const file = fileInput.files[0];
+      if (!file) {
+        uploadStatus.textContent = "Please select a file to upload.";
+        uploadStatus.className = "error";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const response = await fetch("http://127.0.0.1:5000/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await response.json();
+
+        if (response.ok) {
+          uploadStatus.textContent = data.message;
+          uploadStatus.className = "";
+        } else {
+          uploadStatus.textContent = data.error;
+          uploadStatus.className = "error";
+        }
+      } catch (error) {
+        uploadStatus.textContent = "Error uploading file.";
+        uploadStatus.className = "error";
+      }
+    });
+
+    // Ask Question Functionality
+    askButton.addEventListener("click", async () => {
+      const question = questionInput.value.trim();
+      if (!question) {
+        responseBox.textContent = "Please enter a question.";
+        responseBox.className = "error";
+        return;
+      }
+
+      try {
+        const response = await fetch("http://127.0.0.1:5000/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question }),
+        });
+        const data = await response.json();
+
+        if (response.ok) {
+          responseBox.textContent = `Answer: ${data.answer}`;
+          responseBox.className = "";
+        } else {
+          responseBox.textContent = data.error;
+          responseBox.className = "error";
+        }
+      } catch (error) {
+        responseBox.textContent = "Error retrieving answer.";
+        responseBox.className = "error";
+      }
+    });
+  </script>
+</body>
+</html>
