@@ -49,7 +49,7 @@
     button:hover {
       background-color: #0056b3;
     }
-    .response-box {
+    .response-box, .answer-box {
       margin-top: 20px;
       background: #f9f9f9;
       padding: 10px;
@@ -59,6 +59,17 @@
     .error {
       color: red;
     }
+    .answer-box {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .file-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .file-buttons button {
+      flex: 1;
+    }
   </style>
 </head>
 <body>
@@ -67,9 +78,12 @@
 
     <!-- File Upload Section -->
     <div class="file-upload">
-      <label for="file-input">Upload a PDF or Word Document:</label>
-      <input type="file" id="file-input" accept=".pdf, .docx">
-      <button id="upload-button">Upload File</button>
+      <label>Select File Type to Upload:</label>
+      <div class="file-buttons">
+        <button id="pdf-button">Upload PDF</button>
+        <button id="word-button">Upload Word</button>
+      </div>
+      <input type="file" id="file-input" accept=".pdf,.docx" style="display:none;">
       <div id="upload-status"></div>
     </div>
 
@@ -80,21 +94,36 @@
       <button id="ask-button">Ask</button>
       <div id="response-box"></div>
     </div>
+
+    <!-- Answer Box -->
+    <div class="answer-box" id="answer-box">
+      <h3>Answers:</h3>
+      <div id="answers-list"></div>
+    </div>
   </div>
 
   <script>
-    const uploadButton = document.getElementById("upload-button");
     const fileInput = document.getElementById("file-input");
     const uploadStatus = document.getElementById("upload-status");
     const askButton = document.getElementById("ask-button");
     const questionInput = document.getElementById("question-input");
     const responseBox = document.getElementById("response-box");
+    const answersList = document.getElementById("answers-list");
 
     // File Upload Functionality
-    uploadButton.addEventListener("click", async () => {
+    document.getElementById("pdf-button").addEventListener("click", () => triggerFileUpload(".pdf"));
+    document.getElementById("word-button").addEventListener("click", () => triggerFileUpload(".docx"));
+
+    const triggerFileUpload = (fileType) => {
+      fileInput.accept = fileType;
+      fileInput.click();
+    };
+
+    fileInput.addEventListener("change", async () => {
       const file = fileInput.files[0];
+
       if (!file) {
-        uploadStatus.textContent = "Please select a file to upload.";
+        uploadStatus.textContent = "Please select a file.";
         uploadStatus.className = "error";
         return;
       }
@@ -103,7 +132,7 @@
       formData.append("file", file);
 
       try {
-        const response = await fetch("http://127.0.0.1:5000/upload", {
+        const response = await fetch("https://75d0-103-216-213-30.ngrok-free.app/upload", {
           method: "POST",
           body: formData,
         });
@@ -125,6 +154,7 @@
     // Ask Question Functionality
     askButton.addEventListener("click", async () => {
       const question = questionInput.value.trim();
+
       if (!question) {
         responseBox.textContent = "Please enter a question.";
         responseBox.className = "error";
@@ -132,21 +162,28 @@
       }
 
       try {
-        const response = await fetch("http://127.0.0.1:5000/ask", {
+        const response = await fetch("https://75d0-103-216-213-30.ngrok-free.app/ask", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ question }),
         });
+
         const data = await response.json();
 
         if (response.ok) {
           responseBox.textContent = `Answer: ${data.answer}`;
           responseBox.className = "";
+
+          // Append the question and answer to the answer box
+          const answerEntry = document.createElement("p");
+          answerEntry.innerHTML = `<strong>Q:</strong> ${question} <br> <strong>A:</strong> ${data.answer}`;
+          answersList.appendChild(answerEntry);
         } else {
-          responseBox.textContent = data.error;
+          responseBox.textContent = data.error || "Error retrieving answer.";
           responseBox.className = "error";
         }
       } catch (error) {
+        console.error("[DEBUG] Fetch error:", error);
         responseBox.textContent = "Error retrieving answer.";
         responseBox.className = "error";
       }
