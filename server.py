@@ -7,6 +7,7 @@ from transformers import pipeline
 from werkzeug.utils import secure_filename
 from flask_cors import CORS  # Import CORS
 import nest_asyncio
+from langchain_ollama.llms import OllamaLLM
 
 nest_asyncio.apply()
 
@@ -17,7 +18,7 @@ app = Flask(__name__)
 # CORS(app)
 # CORS(app, origins=["http://127.0.0.1:5500", "http://127.0.0.1:3000"])
 CORS(app, origins="*", methods=["GET", "POST", "OPTIONS"], allow_headers=["Content-Type", "Authorization"])
-00
+# 00
 
 # Configure upload folder
 UPLOAD_FOLDER = './uploads'
@@ -112,8 +113,12 @@ def ask_question():
     # Get the answer from the model
     try:
         print(f"[DEBUG] Asking question: {question}")
-        result = qa_pipeline(question=question, context=context)
-        answer = result['answer']
+        # result = qa_pipeline(question=question, context=context)
+        llm = OllamaLLM(model="mistral")
+        prompt = f"You are a question answering assistant that gets a question and answers it in a very short way from this context {context}, the question is as follows: {question}"
+        result = llm.invoke(prompt)
+        # answer = result['answer']
+        answer = result
         print(f"[DEBUG] Answer: {answer}")
         return jsonify({"answer": answer})
     except Exception as e:

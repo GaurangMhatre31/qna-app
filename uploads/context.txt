@@ -1,52 +1,30 @@
-GAURANG BHUPENDRA MHATRE
-+91-7028474833 Mumbai, Maharashtra
-gaurangmhatre3101@gmail.com Linkedin -
-din- https://www.linkedin.com/in/gaurang-mhatre-50bba1249/⋄
+TANISHQ AMOL GHODEKAR
++91-9561810009 Mumbai, Maharashtra
+tanishqghodekar28@gmail.com Linkedin -
+https://www.linkedin.com/in/tanishq-ghodekar-
+b25b9826a?utm_source=share&utm_campaign=share_via&
+utm_content=profile&utm_medium=android_app ⋄
 OBJECTIVE
-Artificial Intelligence Engineer fueled by a profound enthusiasm for innovative AI&ML solutions.
+To leverage my expertise in modern front-end technologies like HTML, CSS, JavaScript, and
+frameworks like React/Angular to create visually appealing, user-friendly web interfaces that deliver
+exceptional digital experiences and contribute to impactful business solutions within a dynamic team
+environment
 EDUCATION
-(BE)Bachelor of Artificial Intelligence and Data Science, Savitribai Phule Pune University. 2020-2024
-Relevant Coursework: NLP, ANN, Reinforcement Learning.
-GPA: 8.8
-Higher Secondary Board(HSC), Maharashtra State Board. 2018 - 2020
+BSC IN COMPUTER SCIENCE, Abhinav college of arts commerce and science 2022-2025
+Higher Secondary Board(HSC), Maharashtra State Board. 2020 - 2022
 SKILLS
-Technical Skills Python, Generative AI, Machine Learning, Databricks, Pandas, Numpy , open cv, ollama
-streamlit.
-Soft Skills Excellent Communication, Cooperative Collaboration, Problem solving, Adaptability.
-EXPERIENCE
-Elite Software
-Intern - Python & Django
-Duration: 3 months
-• Developed and maintained Django-based applications, enhancing backend functionality and improving overall
-system efficiency.
-• Collaborated with the team to create scalable web applications, focusing on clean and efficient code.
-MindTech Solutions
-Intern - AI & ML
-Duration: 1 month
-• Assisted in building and testing machine learning models for various AI applications, gaining hands-on
-experience in model development and evaluation.
-• Worked closely with the team on data preprocessing and feature engineering to improve model accuracy.
-• Participated in brainstorming sessions for AI-driven solutions, contributing ideas and insights on ML techniques.
+Technical Skills Python, HTML , JAVA, Jquer
+Soft Skills Excellent Communication, Cooperative Collaboration, Problem solving, Adaptability..
 .
 PROJECT
-Automated QA Model for PDF and Word Files
-Developed an automated question-answering model using a BERT-based transformer to process both PDF and
-Word documents. Implemented seamless text extraction without requiring file-type input from the user, enabling
-users to directly upload files. Integrated speech recognition for voice-based question input and text-to-speech to
-deliver spoken responses, providing a more interactive experience. Technologies used include Python,
-Transformers, PyPDF2, python-docx, and pyttsx3..
-Multilingual Medical Diagnosis Chatbot
-based on symptoms spoken in Hindi, Marathi, or English. Utilized `SpeechRecognition` for voice input,
-`googletrans` for language detection, `TF-IDF` and Logistic Developed a voice-enabled chatbot in Python that
-provides medical diagnoses and medicine suggestions Regression for symptom-based diagnosis, and `gTTS` for
-spoken responses, enhancing user accessibility in native languages.
-OpenCV Object Detection System
-Developed a real-time object detection system using OpenCV and Python, implementing image processing
-algorithms to identify and classify objects from video feeds. Enhanced detection accuracy and speed, creating an
-interactive interface to visualize results effectively.
+https://www.linkedin.com/in/tanishq-ghodekar-b25b9826a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_apn
+.24/7 NEWS
+Your college project is a Global News Website designed to deliver the latest updates and information from around the
+world. The website covers diverse topics such as politics, technology, sports, entertainment, and global events, ensuring a
+comprehensive news experience. It features a user-friendly interface, real-time updates, and well-categorized sections to
+make information easily accessible. The project showcases teamwork, technical skills, and a commitment to providing
+credible and engaging news content
 CERTIFICATIONS
-*Machine Learning: AI, Python + Chatgpt *Databricks Lakehouse fundamentals
-*Genrative AI course from oracle university * streamlit cerificetion
-EXTRA-CURRICULAR ACTIVITIE
-• Social worker at National Service Scheme(NSS).Led a team of five members to clean a well-known hill in the Pune area,
-effectively managing the team to ensure optimal performance and completion of the task
+*WEB DEVLOPMENT *JAVASCRIPT
+*Jquer * PYTHON
+•
